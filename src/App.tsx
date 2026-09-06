@@ -15,7 +15,7 @@ export default function App() {
         Skip to content
       </a>
       <FloatingNav />
-      <main id="main-content">
+      <main id="main-content" tabIndex={-1}>
         <HeroSection />
         <ResearchSection />
         <ResourcesSection />
