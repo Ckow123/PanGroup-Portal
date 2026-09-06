@@ -1,17 +1,27 @@
+import FloatingNav from './components/FloatingNav'
+import SiteFooter from './components/SiteFooter'
+import ClosingSection from './sections/ClosingSection'
+import HeroSection from './sections/HeroSection'
+import ResearchSection from './sections/ResearchSection'
+import ResourcesSection from './sections/ResourcesSection'
+
 export default function App() {
   return (
-    <main className="grid min-h-screen place-items-center bg-slate-950 px-6 text-slate-100">
-      <section className="max-w-2xl text-center">
-        <p className="mb-4 text-sm font-semibold uppercase tracking-[0.25em] text-cyan-300">
-          Pan Group
-        </p>
-        <h1 className="text-4xl font-semibold tracking-tight sm:text-6xl">
-          Breast Cancer Research Portal
-        </h1>
-        <p className="mt-6 text-lg leading-8 text-slate-300">
-          Portal foundation verified. The research experience is coming next.
-        </p>
-      </section>
-    </main>
+    <div className="min-h-screen overflow-x-clip bg-paper text-ink">
+      <a
+        href="#main-content"
+        className="fixed left-4 top-3 z-[60] -translate-y-20 rounded-full bg-deep px-4 py-2 text-sm font-semibold text-white shadow-lg transition-transform focus:translate-y-0 focus:outline-none focus:ring-2 focus:ring-aqua motion-reduce:transition-none"
+      >
+        Skip to content
+      </a>
+      <FloatingNav />
+      <main id="main-content">
+        <HeroSection />
+        <ResearchSection />
+        <ResourcesSection />
+        <ClosingSection />
+      </main>
+      <SiteFooter />
+    </div>
   )
 }
