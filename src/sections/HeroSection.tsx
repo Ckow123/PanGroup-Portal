@@ -1,4 +1,5 @@
 import useHeroMotion from '../hooks/useHeroMotion'
+import { quartzRoutes } from '../quartzRoutes'
 
 export default function HeroSection() {
   const { shellRef, artRef } = useHeroMotion()
@@ -56,8 +57,9 @@ export default function HeroSection() {
           </div>
 
           <a
-            href="#research"
-            aria-label="Explore Pan Group research"
+            href={quartzRoutes.home}
+            target="_self"
+            aria-label="Explore Now — Research Atlas"
             className="hero-reveal hero-cta group mt-8 inline-flex min-h-12 items-center gap-4 rounded-full border px-5 py-3 text-xs font-semibold tracking-[0.12em] text-deep focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white focus-visible:ring-2 focus-visible:ring-aqua/70 sm:mt-10 sm:px-6 sm:text-sm"
           >
             EXPLORE NOW

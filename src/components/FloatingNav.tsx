@@ -1,8 +1,10 @@
+import { quartzRoutes } from '../quartzRoutes'
+
 const navItems = [
-  { label: '文献', href: '#literature' },
-  { label: '科普文', href: '#science-notes' },
-  { label: '实验技能', href: '#lab-skills' },
-  { label: '知识库', href: '#knowledge-base' },
+  { label: '文献', href: quartzRoutes.literature },
+  { label: '科普文', href: quartzRoutes.scienceNotes },
+  { label: '实验技能', href: quartzRoutes.labSkills },
+  { label: '知识库', href: quartzRoutes.knowledgeBase },
 ]
 
 export default function FloatingNav() {
@@ -31,6 +33,8 @@ export default function FloatingNav() {
             <li key={item.href} className="min-w-0">
               <a
                 href={item.href}
+                target="_self"
+                aria-label={`${item.label} — Research Atlas`}
                 className="nav-link block whitespace-nowrap rounded-full px-1 py-2 text-center text-[0.7rem] font-medium text-deep/72 hover:text-deep focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-deep focus-visible:ring-2 focus-visible:ring-aqua/55 motion-reduce:transition-none sm:px-3 sm:text-sm"
                 lang="zh-Hans"
               >
