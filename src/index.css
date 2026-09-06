@@ -67,6 +67,30 @@ a {
   object-position: 50% 50%;
 }
 
+.hero-ambient {
+  /* Broad light stays responsive without pretending to track the shield. */
+  background: radial-gradient(ellipse at 74% 62%, rgba(94, 226, 223, 0.3), transparent 48%);
+  opacity: 0.24;
+}
+
+.hero-particle {
+  position: absolute;
+  left: 61%;
+  top: 31%;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: #baf6f4;
+  opacity: 0.22;
+}
+
+.hero-particle:nth-child(2) { left: 83%; top: 22%; width: 2px; height: 2px; background: #d8d0ff; --drift-time: 27s; --drift-delay: -9s; }
+.hero-particle:nth-child(3) { left: 48%; top: 68%; width: 4px; height: 4px; background: #ffd8e5; opacity: 0.16; --drift-time: 31s; --drift-delay: -18s; }
+.hero-particle:nth-child(4) { left: 91%; top: 73%; width: 2px; height: 2px; --drift-time: 29s; --drift-delay: -6s; }
+.hero-particle:nth-child(5) { left: 72%; top: 84%; background: #d8d0ff; opacity: 0.18; --drift-time: 33s; --drift-delay: -22s; }
+.hero-particle:nth-child(6) { left: 37%; top: 48%; width: 2px; height: 2px; background: #ffd8e5; --drift-time: 28s; --drift-delay: -13s; }
+.hero-particle:nth-child(7) { left: 78%; top: 48%; opacity: 0.16; --drift-time: 35s; --drift-delay: -25s; }
+
 .hero-wash {
   background:
     linear-gradient(
@@ -94,6 +118,7 @@ a {
 }
 
 .floating-nav {
+  position: relative;
   border-color: rgba(255, 255, 255, 0.72);
   background: linear-gradient(
     135deg,
@@ -110,6 +135,7 @@ a {
 
 .nav-link {
   transition:
+    transform 220ms ease,
     color 180ms ease,
     background-color 180ms ease,
     box-shadow 180ms ease;
@@ -121,6 +147,7 @@ a {
 }
 
 .hero-cta {
+  position: relative;
   border-color: rgba(225, 255, 254, 0.78);
   background-color: rgba(248, 252, 255, 0.86);
   background-image: linear-gradient(
@@ -141,7 +168,7 @@ a {
     transform 200ms ease;
 }
 
-.hero-cta:hover {
+.hero-cta:is(:hover, :focus-visible) {
   border-color: rgba(94, 226, 223, 0.76);
   background-color: rgba(255, 255, 255, 0.96);
   box-shadow:
@@ -159,8 +186,51 @@ a {
   transition: transform 200ms ease;
 }
 
-.hero-cta:hover .hero-cta-arrow {
+.hero-cta:is(:hover, :focus-visible) .hero-cta-arrow {
   transform: translateX(0.2rem);
+}
+
+.floating-nav::before,
+.hero-cta::before,
+.hero-cta::after {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 320ms ease, transform 320ms ease;
+}
+
+.floating-nav::before,
+.hero-cta::before {
+  background: radial-gradient(ellipse at 28% 0%, rgba(255, 255, 255, 0.4), transparent 65%);
+}
+
+.hero-cta::after {
+  box-shadow: 0 0 22px rgba(94, 226, 223, 0.2);
+}
+
+.floating-nav:focus-within::before,
+.hero-cta:focus-visible::before,
+.hero-cta:focus-visible::after {
+  opacity: 1;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .floating-nav:hover::before,
+  .hero-cta:hover::before,
+  .hero-cta:hover::after {
+    opacity: 1;
+  }
+
+  .floating-nav:hover::before {
+    transform: translateX(2px);
+  }
+
+  .nav-link:is(:hover, :focus-visible) {
+    transform: translateY(-1px);
+  }
 }
 
 .content-transition {
@@ -286,6 +356,10 @@ a {
 }
 
 @media (max-width: 520px) {
+  .hero-particle:nth-child(n + 5) {
+    display: none;
+  }
+
   .hero-art {
     inset: auto 0 0;
     height: 66%;
@@ -305,6 +379,69 @@ a {
   html {
     scroll-behavior: smooth;
   }
+
+  .hero-art {
+    animation: hero-art-reveal 640ms ease-out backwards, hero-breathe 16s ease-in-out infinite;
+  }
+
+  .hero-reveal,
+  .nav-reveal {
+    animation: hero-enter 560ms cubic-bezier(0.22, 0.61, 0.36, 1) var(--reveal-delay, 0ms) backwards;
+  }
+
+  .nav-reveal { --reveal-delay: 90ms; }
+  .hero-welcome { --reveal-delay: 180ms; }
+  .hero-name { --reveal-delay: 280ms; }
+  .hero-accent { --reveal-delay: 380ms; }
+  .hero-details { --reveal-delay: 470ms; }
+  .hero-cta { --reveal-delay: 580ms; }
+
+  .hero-ambient {
+    animation: hero-ambient-drift 22s ease-in-out infinite;
+  }
+
+  .hero-particle {
+    animation: hero-particle-drift var(--drift-time, 25s) ease-in-out var(--drift-delay, -4s) infinite;
+  }
+
+  .hero-shell[data-motion-paused="true"] .hero-art {
+    animation-play-state: running, paused;
+  }
+
+  .hero-shell[data-motion-paused="true"] :is(.hero-ambient, .hero-particle) {
+    animation-play-state: paused;
+  }
+
+  /* Keyboard users never have to wait for an entrance to finish. */
+  .nav-reveal:focus-within,
+  .hero-cta:focus-visible {
+    animation: none;
+  }
+}
+
+@keyframes hero-art-reveal {
+  from { opacity: 0.4; }
+  to { opacity: 1; }
+}
+
+@keyframes hero-enter {
+  from { opacity: 0; translate: 0 6px; }
+  to { opacity: 1; translate: 0 0; }
+}
+
+@keyframes hero-breathe {
+  0%, 100% { scale: 1; }
+  50% { scale: 1.01; }
+}
+
+@keyframes hero-ambient-drift {
+  0%, 100% { opacity: 0.24; transform: translate3d(0, 0, 0); }
+  50% { opacity: 0.32; transform: translate3d(5px, -3px, 0); }
+}
+
+@keyframes hero-particle-drift {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(5px, -12px, 0); }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -312,16 +449,26 @@ a {
   *::before,
   *::after {
     scroll-behavior: auto !important;
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
+    animation: none !important;
     transition-duration: 0.01ms !important;
   }
 
   .hero-cta,
   .hero-cta-arrow,
   .closing-cta,
-  .nav-link {
-    transform: none;
+  .closing-cta span,
+  .nav-link,
+  .hero-art,
+  .hero-reveal,
+  .nav-reveal,
+  .hero-ambient,
+  .hero-particle,
+  .floating-nav::before,
+  .hero-cta::before,
+  .hero-cta::after {
+    transform: none !important;
+    translate: none !important;
+    scale: none !important;
     transition: none;
   }
 }

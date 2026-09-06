@@ -7,7 +7,7 @@ const navItems = [
 
 export default function FloatingNav() {
   return (
-    <header className="fixed inset-x-0 top-0 z-50 flex justify-center px-3 pt-3 sm:px-6 sm:pt-5">
+    <header className="nav-reveal fixed inset-x-0 top-0 z-50 flex justify-center px-3 pt-3 sm:px-6 sm:pt-5">
       <nav
         aria-label="Primary navigation"
         className="floating-nav flex w-full max-w-4xl items-center gap-1 rounded-full border px-2 py-1.5 text-deep sm:w-auto sm:gap-3 sm:px-3 sm:py-2"
