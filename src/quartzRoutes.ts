@@ -1,6 +1,6 @@
 // Canonical routes verified against Quartz's authored homepage, emitted sitemap,
-// and live pages. Keep the existing Quartz origin and lowercase generated paths.
-const quartzOrigin = 'https://oncologykarpathywiki.cn'
+// and live pages. Use the independent Atlas origin and lowercase generated paths.
+const quartzOrigin = 'https://atlas.oncologykarpathywiki.cn'
 
 export const quartzRoutes = {
   home: `${quartzOrigin}/`,
