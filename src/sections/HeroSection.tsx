@@ -2,7 +2,7 @@ import useHeroMotion from '../hooks/useHeroMotion'
 import { quartzRoutes } from '../quartzRoutes'
 
 export default function HeroSection() {
-  const { shellRef, artRef } = useHeroMotion()
+  const { shellRef } = useHeroMotion()
 
   return (
     <section
@@ -12,7 +12,6 @@ export default function HeroSection() {
       className="hero-shell relative isolate min-h-[max(42rem,100svh)] overflow-hidden bg-deep"
     >
       <img
-        ref={artRef}
         src="/media/hero/pan-group-hero-master-v1.png"
         alt="A chibi immune-cell guardian exploring a glowing tumor microenvironment"
         width={1672}
