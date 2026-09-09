@@ -159,22 +159,15 @@ a {
     0 12px 34px rgba(21, 31, 79, 0.2),
     inset 0 1px 0 rgba(255, 255, 255, 0.94),
     0 0 0 1px rgba(94, 226, 223, 0.07);
-  -webkit-backdrop-filter: blur(10px) saturate(112%);
-  backdrop-filter: blur(10px) saturate(112%);
   transition:
     background-color 200ms ease,
     border-color 200ms ease,
-    box-shadow 200ms ease,
     transform 200ms ease;
 }
 
 .hero-cta:is(:hover, :focus-visible) {
   border-color: rgba(94, 226, 223, 0.76);
   background-color: rgba(255, 255, 255, 0.96);
-  box-shadow:
-    0 14px 38px rgba(21, 31, 79, 0.22),
-    inset 0 1px 0 rgba(255, 255, 255, 0.98),
-    0 0 0 2px rgba(94, 226, 223, 0.12);
   transform: translateY(-1px);
 }
 
@@ -190,9 +183,7 @@ a {
   transform: translateX(0.2rem);
 }
 
-.floating-nav::before,
-.hero-cta::before,
-.hero-cta::after {
+.floating-nav::before {
   content: "";
   position: absolute;
   inset: 1px;
@@ -202,25 +193,16 @@ a {
   transition: opacity 320ms ease, transform 320ms ease;
 }
 
-.floating-nav::before,
-.hero-cta::before {
+.floating-nav::before {
   background: radial-gradient(ellipse at 28% 0%, rgba(255, 255, 255, 0.4), transparent 65%);
 }
 
-.hero-cta::after {
-  box-shadow: 0 0 22px rgba(94, 226, 223, 0.2);
-}
-
-.floating-nav:focus-within::before,
-.hero-cta:focus-visible::before,
-.hero-cta:focus-visible::after {
+.floating-nav:focus-within::before {
   opacity: 1;
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .floating-nav:hover::before,
-  .hero-cta:hover::before,
-  .hero-cta:hover::after {
+  .floating-nav:hover::before {
     opacity: 1;
   }
 
@@ -463,9 +445,7 @@ a {
   .nav-reveal,
   .hero-ambient,
   .hero-particle,
-  .floating-nav::before,
-  .hero-cta::before,
-  .hero-cta::after {
+  .floating-nav::before {
     transform: none !important;
     translate: none !important;
     scale: none !important;
