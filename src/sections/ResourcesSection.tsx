@@ -96,6 +96,27 @@ export default function ResourcesSection() {
             </article>
           ))}
         </div>
+
+        <a
+          href="https://library.oncologykarpathywiki.cn/"
+          className="resource-card mt-5 flex flex-col justify-between gap-5 rounded-[1.5rem] border p-6 backdrop-blur-sm transition-colors hover:bg-white/75 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-deep sm:flex-row sm:items-center sm:p-7"
+          aria-label="打开 Pan Group 交互式资料馆"
+        >
+          <div className="min-w-0">
+            <p className="mb-2 text-xs font-semibold uppercase tracking-[0.145em] text-ink/70">
+              NEW / INTERACTIVE LIBRARY
+            </p>
+            <h3 className="font-display text-2xl font-semibold tracking-[-0.03em] sm:text-3xl">
+              交互式资料馆
+            </h3>
+            <p className="section-copy mt-2 max-w-2xl text-base leading-7 text-ink/70">
+              搜索科研来源、探索知识网络，并阅读已获许可公开的论文全文。
+            </p>
+          </div>
+          <span className="shrink-0 self-start rounded-full border border-lilac/25 bg-white/62 px-5 py-3 text-sm font-semibold text-deep sm:self-auto">
+            进入资料馆 →
+          </span>
+        </a>
       </div>
     </section>
   )
